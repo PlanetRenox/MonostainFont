@@ -4,6 +4,8 @@
 
 Monostain is a free, programmatic monospace font from the [Stain](https://github.com/PlanetRenox/StainFont) family, inspired by JetBrains Mono.
 
+Try it, see every glyph and download it at **[monostain.pages.dev](https://monostain.pages.dev/)**.
+
 Every glyph is written in code as centerlines, which [skia-pathops](https://github.com/fonttools/skia-pathops) strokes at the weight's width and merges into one outline. Arches and bowls (n h m b d p q) are filled bands instead, so they thin where they meet the stem. Bold is the same drawing with a thicker stroke, and the italics lean 10°.
 
 - Regular, Bold, Italic and Bold Italic, every glyph 600 units wide

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://monostain.pages.dev/sitemap.xml

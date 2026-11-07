@@ -2,8 +2,9 @@
 # requires-python = ">=3.10"
 # dependencies = ["fonttools[woff]>=4.50", "skia-pathops>=0.8"]
 # ///
-# uv run build.py  ->  dist/Monostain-{Regular,Bold,Italic,BoldItalic}.{otf,ttf,woff2}
-import math, os
+# uv run build.py  ->  dist/Monostain-{Regular,Bold,Italic,BoldItalic}.{otf,ttf,woff2}, dist/Monostain.zip,
+#                      dist/chars.txt (every character, for the site) and favicon.svg
+import math, os, zipfile
 from functools import cache
 from fontTools import agl
 from fontTools.fontBuilder import FontBuilder
@@ -12,6 +13,8 @@ from fontTools.pens.areaPen import AreaPen
 from fontTools.pens.boundsPen import BoundsPen
 from fontTools.pens.cu2quPen import Cu2QuPen
 from fontTools.pens.recordingPen import RecordingPen
+from fontTools.pens.svgPathPen import SVGPathPen
+from fontTools.pens.transformPen import TransformPen
 from fontTools.pens.reverseContourPen import ReverseContourPen
 from fontTools.pens.t2CharStringPen import T2CharStringPen
 from fontTools.pens.ttGlyphPen import TTGlyphPen
@@ -106,14 +109,38 @@ def build(style, w, slant, ttf):
     os2.recalcUnicodeRanges(fb.font)
     return fb.font
 
+def favicon():
+    """Bold m from the font itself, centred white on a dark rounded square"""
+    rec, pen, bp = drawings(128, 0)[name('m')], SVGPathPen(None, ntos=lambda v: f'{v:g}' if v == int(v) else f'{v:.1f}'), BoundsPen(None)
+    rec.replay(TransformPen(pen, (1, 0, 0, -1, 0, 0)))  # font y points up, svg y down
+    rec.replay(bp)
+    x0, y0, x1, y1 = bp.bounds
+    cx, cy, s = (x0 + x1) / 2, -(y0 + y1) / 2, max(x1 - x0, y1 - y0) * 1.5
+    v = f'{cx - s / 2:.0f} {cy - s / 2:.0f} {s:.0f} {s:.0f}'
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{v}"><rect x="{cx - s / 2:.0f}" y="{cy - s / 2:.0f}" width="{s:.0f}" height="{s:.0f}" rx="{s * .21:.0f}" fill="#141414"/>'
+            f'<path fill="#f7f7f5" d="{pen.getCommands()}"/></svg>\n')
+
+def bundle(files):
+    """Zip of the desktop fonts and license, timestamps pinned so the zip is reproducible too"""
+    with zipfile.ZipFile('dist/Monostain.zip', 'w', zipfile.ZIP_DEFLATED) as z:
+        for f in files:
+            i = zipfile.ZipInfo(f'Monostain/{os.path.basename(f)}', (2026, 11, 7, 0, 0, 0))
+            i.compress_type, i.external_attr = zipfile.ZIP_DEFLATED, 0o644 << 16
+            z.writestr(i, open(f, 'rb').read())
+
 if __name__ == '__main__':
     os.makedirs('dist', exist_ok=True)
+    desktop = []
     for style, w, slant in STYLES:
         ps = style.replace(' ', '')
         for ttf, ext in ((False, 'otf'), (True, 'ttf')):
             f = build(style, w, slant, ttf)
-            f.save(f'dist/Monostain-{ps}.{ext}')
+            f.save(path := f'dist/Monostain-{ps}.{ext}')
+            desktop.append(path)
             if not ttf:
                 f.flavor = 'woff2'
                 f.save(f'dist/Monostain-{ps}.woff2')
         print(f'Built Monostain {style}: {len(G)} characters')
+    bundle(sorted(desktop) + ['LICENSE'])
+    open('dist/chars.txt', 'w').write(''.join(c for c in sorted(G, key=ord) if c.isprintable() and not c.isspace() and c != '\u00ad'))
+    open('favicon.svg', 'w').write(favicon())

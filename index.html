@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Monostain · Free Programmatic Monospace Font</title>
+<meta name="description" content="Monostain is a free, programmatic monospace font from the Stain family, inspired by JetBrains Mono. Regular, Bold, Italic and Bold Italic, 383 characters, CC0 public domain.">
+<link rel="canonical" href="https://monostain.pages.dev/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Monostain">
+<meta property="og:url" content="https://monostain.pages.dev/">
+<meta property="og:title" content="Monostain">
+<meta property="og:description" content="A free, programmatic monospace font from the Stain family. Every glyph is drawn in code.">
+<meta property="og:image" content="https://monostain.pages.dev/docs/specimen.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Monostain","url":"https://monostain.pages.dev/"}</script>
+<link rel="preload" href="/dist/Monostain-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/dist/Monostain-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:Monostain;src:url(/dist/Monostain-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:Monostain;src:url(/dist/Monostain-Bold.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:Monostain;src:url(/dist/Monostain-Italic.woff2) format("woff2");font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:Monostain;src:url(/dist/Monostain-BoldItalic.woff2) format("woff2");font-weight:700;font-style:italic;font-display:swap}
+:root{--bg:#f7f7f5;--ink:#141414;--mute:#6b6b66;--line:#dcdcd5;--card:#ededea;--k:#7a3ee8;--s:#0a7d3e;--n:#c2410c;--c:#8a8a84}
+@media(prefers-color-scheme:dark){:root{--bg:#121212;--ink:#ededea;--mute:#9a9a94;--line:#2b2b29;--card:#1c1c1b;--k:#b896ff;--s:#5fd08f;--n:#ff9b5e;--c:#7b7b76}}
+*{box-sizing:border-box}
+html{color-scheme:light dark}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Monostain,monospace}
+main{max-width:980px;margin:0 auto;padding:64px 24px 40px}
+a{color:inherit}
+code{font-family:inherit}
+h1{font-size:clamp(56px,13vw,132px);line-height:.95;margin:0;font-weight:700}
+.lede{color:var(--mute);margin:18px 0 28px;max-width:62ch}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.btn{padding:12px 22px;background:var(--ink);color:var(--bg);text-decoration:none;font-weight:700;border:2px solid var(--ink)}
+.btn.alt{background:none;color:var(--ink)}
+.btn:hover{background:var(--k);border-color:var(--k);color:#fff}
+section{margin-top:72px}
+h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin:0 0 14px;font-weight:400}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
+.bar button{font:inherit;font-size:14px;padding:6px 12px;background:none;color:var(--ink);border:1px solid var(--line);cursor:pointer}
+.bar button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.bar label{display:flex;gap:10px;align-items:center;margin-left:auto;font-size:14px;color:var(--mute)}
+.bar input{width:160px;accent-color:var(--ink)}
+#tester{display:block;width:100%;height:270px;font:22px/1.5 Monostain,monospace;background:var(--card);color:var(--ink);border:0;padding:20px 22px;resize:vertical;outline:none;white-space:pre;overflow:auto}
+.facts{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.facts div{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 20px;color:var(--mute);font-size:14px}
+.facts b{display:block;color:var(--ink);font-size:22px;margin-bottom:4px}
+pre{margin:0;background:var(--card);padding:20px 22px;overflow:auto;font:15px/1.6 Monostain,monospace}
+.k{color:var(--k)}.s{color:var(--s)}.n{color:var(--n)}.c{color:var(--c);font-style:italic}
+.glyphs{display:grid;grid-template-columns:1fr 220px;gap:16px;align-items:start}
+#grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(48px,1fr));border-top:1px solid var(--line);border-left:1px solid var(--line)}
+#grid span{aspect-ratio:1;display:grid;place-items:center;font-size:24px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);cursor:default}
+#grid span:hover,#grid span.on{background:var(--ink);color:var(--bg)}
+#big{position:sticky;top:16px;background:var(--card);text-align:center;padding:10px 0 16px}
+#big div{font-size:140px;line-height:1.3}
+#big small{color:var(--mute)}
+.code{position:relative}
+.copy{position:absolute;top:10px;right:10px;font:inherit;font-size:13px;padding:4px 10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.note{color:var(--mute);font-size:14px}
+footer{margin-top:80px;padding-top:18px;border-top:1px solid var(--line);color:var(--mute);display:flex;flex-wrap:wrap;gap:8px 24px;font-size:14px}
+@media(max-width:700px){.glyphs{grid-template-columns:1fr}#big{display:none}.bar label{margin-left:0}#tester{font-size:15px}}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <h1>Monostain</h1>
+  <p class="lede">A free, programmatic monospace font from the <a href="https://stainfont.pages.dev/">Stain</a> family, inspired by JetBrains Mono. Every glyph is drawn in code, and it's public domain.</p>
+  <div class="cta"><a class="btn" href="/dist/Monostain.zip" download>Download</a><a class="btn alt" href="https://github.com/PlanetRenox/MonostainFont">GitHub</a></div>
+</header>
+
+<section>
+  <h2>Try it</h2>
+  <div class="bar">
+    <button data-style="400 normal" aria-pressed="true">Regular</button><button data-style="700 normal" aria-pressed="false">Bold</button><button data-style="400 italic" aria-pressed="false">Italic</button><button data-style="700 italic" aria-pressed="false">Bold Italic</button>
+    <label>Size <input id="size" type="range" min="12" max="96" value="22"> <span id="sizev">22px</span></label>
+  </div>
+  <textarea id="tester" spellcheck="false" aria-label="Type to try Monostain">const greet = (name = "world") =&gt; `hi, ${name}!`;
+if (a !== b &amp;&amp; x &lt;= 10 || y &gt;= 0) return [0, 1, 2];
+// 0O 1lI| rn m  {}[]()  @#$%^&amp;*  -&gt; =&gt; ==
+The quick brown fox jumps over the lazy dog.
+Ça fait déjà 12€ — «naïve» Øresund, Łódź, Ğüş!</textarea>
+</section>
+
+<section class="facts">
+  <div><b>4 styles</b>Regular, Bold, Italic and Bold Italic</div>
+  <div><b>383 characters</b>ASCII, Latin-1, Latin Extended-A, math, arrows</div>
+  <div><b>0 1 l I |</b>Every lookalike stays distinct</div>
+  <div><b>├─┼─┤</b>Box drawing that joins up in terminals</div>
+  <div><b>CC0</b>Public domain, no attribution needed</div>
+</section>
+
+<section>
+  <h2>In code</h2>
+<pre><span class="k">fn</span> main() -&gt; Result&lt;(), Error&gt; {
+    <span class="k">let mut</span> sum = <span class="n">0_u64</span>; <span class="c">// every glyph is a centerline stroked by code</span>
+    <span class="k">for</span> (i, x) <span class="k">in</span> data.iter().enumerate() {
+        <span class="k">if</span> x % <span class="n">2</span> == <span class="n">0</span> &amp;&amp; i != <span class="n">7</span> { sum += *x; }
+    }
+    println!(<span class="s">"total: {sum:&gt;8} @ {:.2}%"</span>, <span class="n">99.5</span>);
+}</pre>
+</section>
+
+<section>
+  <h2>Glyphs</h2>
+  <div class="glyphs"><div id="grid"></div><div id="big"><div>M</div><small>U+004D</small></div></div>
+</section>
+
+<section>
+  <h2>Use it</h2>
+  <div class="code"><button class="copy" id="copy">Copy</button>
+<pre id="css">@font-face {
+  font-family: "Monostain";
+  src: url("https://cdn.jsdelivr.net/gh/PlanetRenox/MonostainFont@1.0/dist/Monostain-Regular.woff2") format("woff2");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Monostain";
+  src: url("https://cdn.jsdelivr.net/gh/PlanetRenox/MonostainFont@1.0/dist/Monostain-Bold.woff2") format("woff2");
+  font-weight: 700;
+}
+
+code, pre {
+  font-family: "Monostain", monospace;
+}</pre></div>
+  <p class="note">Italics are at <code>Monostain-Italic.woff2</code> and <code>Monostain-BoldItalic.woff2</code>. For editors and terminals, <a href="/dist/Monostain.zip" download>download the zip</a> and install the .otf or .ttf files.</p>
+</section>
+
+<footer><span>Monostain 1.0</span><a href="https://github.com/PlanetRenox/MonostainFont">Source</a><a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a><a href="https://stainfont.pages.dev/">Stain</a><a href="https://planetrenox.com/">Planet Renox</a></footer>
+</main>
+<script>
+const $ = id => document.getElementById(id), t = $('tester'), btns = document.querySelectorAll('[data-style]')
+btns.forEach(b => b.onclick = () => {
+  btns.forEach(x => x.setAttribute('aria-pressed', x == b))
+  ;[t.style.fontWeight, t.style.fontStyle] = b.dataset.style.split(' ')
+})
+const fit = px => { $('size').value = px; t.style.fontSize = $('sizev').textContent = px + 'px' }
+$('size').oninput = e => fit(e.target.value)
+fit(parseInt(getComputedStyle(t).fontSize))  // phones start smaller
+const big = $('big'), show = (s, c) => {
+  big.firstChild.textContent = c
+  big.lastChild.textContent = 'U+' + c.codePointAt(0).toString(16).toUpperCase().padStart(4, '0')
+  document.querySelector('#grid .on')?.classList.remove('on'); s.classList.add('on')
+}
+fetch('/dist/chars.txt').then(r => r.text()).then(cs => {
+  for (const c of cs.trim()) {
+    const s = document.createElement('span')
+    s.textContent = c; s.title = 'U+' + c.codePointAt(0).toString(16).toUpperCase().padStart(4, '0')
+    s.onmouseenter = s.onclick = () => show(s, c)
+    $('grid').append(s)
+  }
+})
+$('copy').onclick = async () => {
+  await navigator.clipboard.writeText($('css').textContent)
+  $('copy').textContent = 'Copied'; setTimeout(() => $('copy').textContent = 'Copy', 1500)
+}
+</script>
+</body>
+</html>
