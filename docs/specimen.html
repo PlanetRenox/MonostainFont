@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Monostain specimen</title>
+<style>
+@font-face{font-family:Monostain;src:url(../dist/Monostain-Regular.woff2) format("woff2");font-weight:400;font-style:normal}
+@font-face{font-family:Monostain;src:url(../dist/Monostain-Bold.woff2) format("woff2");font-weight:700;font-style:normal}
+@font-face{font-family:Monostain;src:url(../dist/Monostain-Italic.woff2) format("woff2");font-weight:400;font-style:italic}
+@font-face{font-family:Monostain;src:url(../dist/Monostain-BoldItalic.woff2) format("woff2");font-weight:700;font-style:italic}
+body{margin:0;padding:48px 56px;background:#fff;color:#111;font:18px/1.45 Monostain,monospace;width:1088px}
+h1{font-size:96px;line-height:1;margin:0 0 6px;font-weight:700;letter-spacing:0}
+.sub{color:#666;margin:0 0 36px}
+.set{font-size:30px;line-height:1.35;margin:0 0 30px;word-break:break-all}
+pre{font:inherit;font-size:19px;line-height:1.5;margin:0;padding:22px 26px;background:#f5f5f7;border-left:3px solid #111}
+.row{display:flex;gap:28px;margin:30px 0 0;font-size:24px}
+.box{line-height:1.32}
+.k{color:#7a3ee8}.s{color:#0a7d3e}.c{color:#888;font-style:italic}.n{color:#c2410c}
+</style>
+<h1>Monostain</h1>
+<p class="sub">A programmatic monospace font from the Stain family · Regular, <b>Bold</b>, <i>Italic</i>, <b><i>Bold Italic</i></b></p>
+<div class="set">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz<br>0123456789 !?&amp;@#$%*(){}[]&lt;&gt;=+-~^/\|_:;.,'"`<br>ÀÉÎÕÜÇÑØßæœ€£¥©®™°±×÷«»“”…→←↑↓</div>
+<pre><span class="k">fn</span> main() -&gt; Result&lt;(), Error&gt; {
+    <span class="k">let mut</span> sum = <span class="n">0_u64</span>; <span class="c">// 0O 1lI| il1 rn m</span>
+    <span class="k">for</span> (i, x) <span class="k">in</span> data.iter().enumerate() {
+        <span class="k">if</span> x % <span class="n">2</span> == <span class="n">0</span> &amp;&amp; i != <span class="n">7</span> { sum += *x; }
+    }
+    println!(<span class="s">"total: {sum:&gt;8} @ {:.2}%"</span>, <span class="n">99.5</span>);
+}</pre>
+<div class="row"><span class="box">╭────┬────╮<br>│ ok │ 42 │<br>╰────┴────╯</span><span><b>Bold</b> <i>Italic</i> <b><i>Both</i></b><br>Łódź · Øresund · Ğüş<br>«naïve» — 12€ ½ ¾</span></div>
+</html>
