@@ -43,7 +43,7 @@ To use Monostain in your project without downloading, import it via CDN:
       font-family: "Monostain", monospace;
     }
 
-For editors and terminals, install the `.otf` or `.ttf` files from [dist](dist).
+For editors and terminals, download `Monostain.zip` from the [latest release](https://github.com/PlanetRenox/MonostainFont/releases/latest) and install the `.otf` or `.ttf` files.
 
 ## Build
 
