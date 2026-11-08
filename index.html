@@ -83,16 +83,22 @@ footer{margin-top:80px;padding-top:18px;border-top:1px solid var(--line);color:v
 
 <section>
   <h2>In code</h2>
-<pre><span class="k">use</span> std::error::Error;
-
-<span class="k">fn</span> main() -&gt; Result&lt;(), Box&lt;<span class="k">dyn</span> Error&gt;&gt; {
-    <span class="k">let</span> data = [<span class="n">3_u64</span>, <span class="n">8</span>, <span class="n">0</span>, <span class="n">42</span>, <span class="n">7</span>, <span class="n">16</span>];
-    <span class="k">let mut</span> sum = <span class="n">0_u64</span>; <span class="c">// every glyph is a centerline stroked by code</span>
-    <span class="k">for</span> (i, x) <span class="k">in</span> data.iter().enumerate() {
-        <span class="k">if</span> x % <span class="n">2</span> == <span class="n">0</span> &amp;&amp; i != <span class="n">7</span> { sum += *x; }
+<pre><span class="c">/// Speck128/128, NSA's ARX block cipher (2013): only add, rotate and xor.</span>
+<span class="k">fn</span> speck(<span class="k">mut</span> x: u64, <span class="k">mut</span> y: u64, <span class="k">mut</span> l: u64, <span class="k">mut</span> k: u64) -&gt; (u64, u64) {
+    <span class="k">for</span> i <span class="k">in</span> <span class="n">0</span>..<span class="n">32</span> {
+        x = x.rotate_right(<span class="n">8</span>).wrapping_add(y) ^ k; <span class="c">// round</span>
+        y = y.rotate_left(<span class="n">3</span>) ^ x;
+        l = l.rotate_right(<span class="n">8</span>).wrapping_add(k) ^ i; <span class="c">// key schedule, same round</span>
+        k = k.rotate_left(<span class="n">3</span>) ^ l;
     }
-    println!(<span class="s">"total: {sum:&gt;8} @ {:.2}%"</span>, <span class="n">99.5</span>);
-    Ok(())
+    (x, y)
+}
+
+<span class="k">fn</span> main() {
+    <span class="k">let</span> (k1, k0) = (<span class="n">0x0f0e0d0c0b0a0908</span>, <span class="n">0x0706050403020100</span>);
+    <span class="k">let</span> ct = speck(<span class="n">0x6c61766975716520</span>, <span class="n">0x7469206564616d20</span>, k1, k0);
+    assert_eq!(ct, (<span class="n">0xa65d985179783265</span>, <span class="n">0x7860fedf5c570d18</span>)); <span class="c">// paper's test vector</span>
+    println!(<span class="s">"{:016x} {:016x}"</span>, ct.0, ct.1);
 }</pre>
 </section>
 
