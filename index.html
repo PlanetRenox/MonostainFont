@@ -83,12 +83,16 @@ footer{margin-top:80px;padding-top:18px;border-top:1px solid var(--line);color:v
 
 <section>
   <h2>In code</h2>
-<pre><span class="k">fn</span> main() -&gt; Result&lt;(), Error&gt; {
+<pre><span class="k">use</span> std::error::Error;
+
+<span class="k">fn</span> main() -&gt; Result&lt;(), Box&lt;<span class="k">dyn</span> Error&gt;&gt; {
+    <span class="k">let</span> data = [<span class="n">3_u64</span>, <span class="n">8</span>, <span class="n">0</span>, <span class="n">42</span>, <span class="n">7</span>, <span class="n">16</span>];
     <span class="k">let mut</span> sum = <span class="n">0_u64</span>; <span class="c">// every glyph is a centerline stroked by code</span>
     <span class="k">for</span> (i, x) <span class="k">in</span> data.iter().enumerate() {
         <span class="k">if</span> x % <span class="n">2</span> == <span class="n">0</span> &amp;&amp; i != <span class="n">7</span> { sum += *x; }
     }
     println!(<span class="s">"total: {sum:&gt;8} @ {:.2}%"</span>, <span class="n">99.5</span>);
+    Ok(())
 }</pre>
 </section>
 
@@ -123,9 +127,9 @@ code, pre {
     <button data-style="400 normal" aria-pressed="true">Regular</button><button data-style="700 normal" aria-pressed="false">Bold</button><button data-style="400 italic" aria-pressed="false">Italic</button><button data-style="700 italic" aria-pressed="false">Bold Italic</button>
     <label>Size <input id="size" type="range" min="12" max="96" value="22"> <span id="sizev">22px</span></label>
   </div>
-  <textarea id="tester" spellcheck="false" aria-label="Type to try Monostain">const greet = (name = "world") =&gt; `hi, ${name}!`;
-if (a !== b &amp;&amp; x &lt;= 10 || y &gt;= 0) return [0, 1, 2];
-// 0O 1lI| rn m  {}[]()  @#$%^&amp;*  -&gt; =&gt; ==
+  <textarea id="tester" spellcheck="false" aria-label="Type to try Monostain">let greet = |name: &amp;str| format!("hi, {name}!");
+if a != b &amp;&amp; x &lt;= 10 || y &gt;= 0 { return vec![0, 1, 2]; }
+// 0O 1lI| rn m  {}[]()  @#$%^&amp;*  -&gt; =&gt; ::
 The quick brown fox jumps over the lazy dog.
 Ça fait déjà 12€ — «naïve» Øresund, Łódź, Ğüş!</textarea>
 </section>

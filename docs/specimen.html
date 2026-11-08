@@ -19,12 +19,16 @@ pre{font:inherit;font-size:19px;line-height:1.5;margin:0;padding:22px 26px;backg
 <h1>Monostain</h1>
 <p class="sub">A programmatic monospace font from the Stain family · Regular, <b>Bold</b>, <i>Italic</i>, <b><i>Bold Italic</i></b></p>
 <div class="set">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz<br>0123456789 !?&amp;@#$%*(){}[]&lt;&gt;=+-~^/\|_:;.,'"`<br>ÀÉÎÕÜÇÑØßæœ€£¥©®™°±×÷«»“”…→←↑↓</div>
-<pre><span class="k">fn</span> main() -&gt; Result&lt;(), Error&gt; {
+<pre><span class="k">use</span> std::error::Error;
+
+<span class="k">fn</span> main() -&gt; Result&lt;(), Box&lt;<span class="k">dyn</span> Error&gt;&gt; {
+    <span class="k">let</span> data = [<span class="n">3_u64</span>, <span class="n">8</span>, <span class="n">0</span>, <span class="n">42</span>, <span class="n">7</span>, <span class="n">16</span>];
     <span class="k">let mut</span> sum = <span class="n">0_u64</span>; <span class="c">// 0O 1lI| il1 rn m</span>
     <span class="k">for</span> (i, x) <span class="k">in</span> data.iter().enumerate() {
         <span class="k">if</span> x % <span class="n">2</span> == <span class="n">0</span> &amp;&amp; i != <span class="n">7</span> { sum += *x; }
     }
     println!(<span class="s">"total: {sum:&gt;8} @ {:.2}%"</span>, <span class="n">99.5</span>);
+    Ok(())
 }</pre>
 <div class="row"><span class="box">╭────┬────╮<br>│ ok │ 42 │<br>╰────┴────╯</span><span><b>Bold</b> <i>Italic</i> <b><i>Both</i></b><br>Łódź · Øresund · Ğüş<br>«naïve» — 12€ ½ ¾</span></div>
 </html>
